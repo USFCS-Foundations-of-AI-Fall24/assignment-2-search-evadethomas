@@ -14,7 +14,7 @@
 ## Charged can be True or False
 
 from copy import deepcopy
-from search_algorithms import breadth_first_search
+from search_algorithms import breadth_first_search, depth_first_search
 
 class RoverState :
     def __init__(self, loc="station", sample_extracted=False, holding_sample=False, charged=False):
@@ -26,7 +26,10 @@ class RoverState :
 
     ## you do this.
     def __eq__(self, other):
-       pass
+      return (self.loc == other.loc and
+                self.sample_extracted == other.sample_extracted and
+                self.holding_sample == other.holding_sample and
+                self.charged == other.charged and self.prev == self.prev)
 
 
     def __repr__(self):
@@ -72,6 +75,7 @@ def move_to_battery(state) :
 
 def pick_up_sample(state) :
     r2 = deepcopy(state)
+    r2.sample_extracted = True
     if state.sample_extracted and state.loc == "sample":
         r2.holding_sample = True
     r2.prev = state
@@ -96,17 +100,23 @@ action_list = [charge, drop_sample, pick_up_sample,
                move_to_sample, move_to_battery, move_to_station]
 
 def battery_goal(state) :
-    return state.loc == "battery"
+    return state.loc == "battery" and state.sample_extracted == True and state.holding_sample == True
 ## add your goals here.
 
 def mission_complete(state) :
-    pass
+    return state.loc == "battery" and state.charged == True and state.sample_extracted == True and state.holding_sample == False
+    
 
 
 if __name__=="__main__" :
     s = RoverState()
-    result = breadth_first_search(s, action_list, mission_complete)
-    print(result)
+    
+    bfs_result, bfs_count = breadth_first_search(s, action_list, mission_complete)
+    print("BFS state count: ", bfs_count)
+    print("Final BFS result: ", bfs_result)
 
+    dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete)
+    print("DFS state count: ", dfs_count)
+    print("Final DFS result: ", dfs_result)
 
 
