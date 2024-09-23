@@ -36,6 +36,11 @@ def a_star(start_state, heuristic_fn, goal_test, use_closed_list=True) :
     search_queue = PriorityQueue()
     closed_list = {}
     search_queue.put(start_state)
+
+    # starting nodes
+        # h(n) - open list contains all
+        # f(n)
+
     ## you do the rest.
 
 
@@ -50,4 +55,4 @@ def sld(state) :
 ## you implement this. Open the file filename, read in each line,
 ## construct a Graph object and assign it to self.mars_graph().
 def read_mars_graph(filename):
-    pass
+    print(filename)

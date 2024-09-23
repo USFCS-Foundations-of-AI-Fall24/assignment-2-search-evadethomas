@@ -122,49 +122,69 @@ action_list = [charge, drop_sample, pick_up_sample, pick_up_tool, drop_tool, use
                move_to_sample, move_to_battery, move_to_station]
 
 def battery_goal(state) :
-    return state.loc == "battery" and state.sample_extracted == True and state.holding_sample == True
+    return state.loc == "battery"
 ## add your goals here.
 
 def mission_complete(state) :
     return state.loc == "battery" and state.charged == True and state.sample_extracted == True and state.holding_sample == False and state.holding_tool == False
-    
 
+def move_to_sample(state) :
+    return state.loc == "sample" and state.holding_tool == True
+
+# A little unsure if we should be holding tool here or not
+
+def remove_sample(state) :
+    return state.holding_sample == True and state.holding_tool == True
+
+def return_to_charger(state) :
+    return mission_complete(state)
 
 if __name__=="__main__" :
     s = RoverState()
 
+    functions = [move_to_sample, remove_sample, return_to_charger]
+
     print("Results!! :")
 
-    print("Mission complete: \n")
-
-    try:
-        bfs_result, bfs_count = breadth_first_search(s, action_list, mission_complete)
-        print("BFS state count: ", bfs_count)
-        print("Final BFS result: ", bfs_result)
-    except TypeError:
-        print("No solution found for bfs")
-
-    print("Finding dfs limit...")
-
-    try:
-        dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete)
-        print("DFS state count: ", dfs_count)
-        print("Final DFS result: ", dfs_result)
-    except TypeError:
-        print("No solution found for dfs, adding to limit")
+    for i in functions:
+        print("start state new new: ", i, s)
     
-    print("using to find good limit to speed up testing... ")
-    limit = 1
-
-    while (limit < dfs_count):
         try:
-            dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete, limit=limit)
+            bfs_result, bfs_count = breadth_first_search(s, action_list, i)
+            print("BFS state count: ", bfs_count)
+            print("Final BFS result: ", bfs_result)
+        except TypeError:
+            print("No solution found for bfs")
+            break
+
+        print(i, bfs_result)
+
+        print("Finding dfs limit...")
+
+        try:
+            dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete)
             print("DFS state count: ", dfs_count)
             print("Final DFS result: ", dfs_result)
-            print("Limit fed to get solution: ", limit)
-            break
         except TypeError:
             print("No solution found for dfs, adding to limit")
-            limit += 1
+            break
+        
+        print("using to find good limit to speed up testing... ")
+        limit = 1
+
+        while (limit < dfs_count):
+            try:
+                ldfs_result, dfs_count = depth_first_search(s, action_list, mission_complete, limit=limit)
+                print("DFS state count: ", dfs_count)
+                print("Final DFS result: ", dfs_result)
+                print("Limit fed to get solution: ", limit)
+                break
+            except TypeError:
+                print("No solution found for dfs, adding to limit")
+                limit += 1 
+        
+        s = RoverState(dfs_result)
+
+   
 
 
