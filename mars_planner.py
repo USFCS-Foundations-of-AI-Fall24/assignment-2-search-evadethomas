@@ -172,13 +172,13 @@ if __name__=="__main__" :
         print("No solution found for dfs")
         ldfs_count = "No result found"
 
-    print("Final DFS result count: ", dfs_count)
-    print("Final BFS result count: ", bfs_count)
-    print("Final LDFS result count: ", ldfs_count)
+    print("Final mission complete DFS result count: ", dfs_count)
+    print("Final mission complete BFS result count: ", bfs_count)
+    print("Final mission complete LDFS result count: ", ldfs_count)
 
-    print("Final DFS result: ", dfs_result)
-    print("Final BFS result: ", bfs_result)
-    print("Final LDFS result : ", ldfs_result)
+    print("Final mission complete DFS result: ", dfs_result)
+    print("Final mission complete BFS result: ", bfs_result)
+    print("Final mission complete LDFS result : ", ldfs_result)
 
     # Partitioned function results
 
@@ -189,8 +189,6 @@ if __name__=="__main__" :
     s3 = RoverState()
 
     for i in functions:
-
-        print(i, "starting states: ", "s1: ", s1, "s2: ", s2, "s3: ", s3)
 
         try:
             bfs_result, bfs_count = breadth_first_search(s1, action_list, i)
@@ -216,14 +214,15 @@ if __name__=="__main__" :
         
 
         print(str(i), ":")
-        print("Final DFS result count: ", dfs_count)
-        print("Final BFS result count: ", bfs_count)
-        print("Final LDFS result count: ", ldfs_count)
+        print(i, "Final DFS result count: ", dfs_count)
+        print(i, "Final BFS result count: ", bfs_count)
+        print(i, "Final LDFS result count: ", ldfs_count, "limit is 10")
 
-        print("Final DFS result: ", dfs_result)
-        print("Final BFS result: ", bfs_result)
-        print("Final LDFS result : ", ldfs_result)
+        print(i, "Final DFS result: ", dfs_result)
+        print(i, "Final BFS result: ", bfs_result)
+        print(i, "Final LDFS result : ", ldfs_result, "limit is 10")
 
+        # reseting the states
         s1 = bfs_result[0]
         s2 = dfs_result[0]
         s3 = ldfs_result[0]
