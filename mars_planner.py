@@ -148,39 +148,39 @@ def return_to_charger(state) :
 if __name__=="__main__" :
     s = RoverState()
 
-    # Mission complete tests:
+    # Mission complete results
 
-    # try:
-    #     bfs_result, bfs_count = breadth_first_search(s, action_list, mission_complete)
-    #     print("BFS state count: ", bfs_count)
+    try:
+        bfs_result, bfs_count = breadth_first_search(s, action_list, mission_complete)
+        print("BFS state count: ", bfs_count)
 
-    # except TypeError:
-    #     print("No solution found for bfs")
-    #     dfs_count = "No result found"
+    except TypeError:
+        print("No solution found for bfs")
+        dfs_count = "No result found"
 
-    # try:
-    #     dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete)
-    #     print("DFS state count: ", dfs_count)
-    # except TypeError:
-    #     print("No solution found for dfs")
-    #     dfs_count = "No result found"
+    try:
+        dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete)
+        print("DFS state count: ", dfs_count)
+    except TypeError:
+        print("No solution found for dfs")
+        dfs_count = "No result found"
 
-    # try:
-    #     ldfs_result, ldfs_count = depth_first_search(s, action_list, mission_complete, limit=2)
-    #     print("DFS state count: ", dfs_count)
-    # except TypeError:
-    #     print("No solution found for dfs")
-    #     ldfs_count = "No result found"
+    try:
+        ldfs_result, ldfs_count = depth_first_search(s, action_list, mission_complete, limit=2)
+        print("DFS state count: ", dfs_count)
+    except TypeError:
+        print("No solution found for dfs")
+        ldfs_count = "No result found"
 
-    # print("Final DFS result count: ", dfs_count)
-    # print("Final BFS result count: ", bfs_count)
-    # print("Final LDFS result count: ", ldfs_count)
+    print("Final DFS result count: ", dfs_count)
+    print("Final BFS result count: ", bfs_count)
+    print("Final LDFS result count: ", ldfs_count)
 
-    # print("Final DFS result: ", dfs_result)
-    # print("Final BFS result: ", bfs_result)
-    # print("Final LDFS result : ", ldfs_result)
+    print("Final DFS result: ", dfs_result)
+    print("Final BFS result: ", bfs_result)
+    print("Final LDFS result : ", ldfs_result)
 
-    # Partitioned function tests
+    # Partitioned function results
 
     functions = [go_to_sample, remove_sample, return_to_charger]
     
