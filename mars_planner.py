@@ -128,11 +128,19 @@ def battery_goal(state) :
 def mission_complete(state) :
     return state.loc == "battery" and state.charged == True and state.sample_extracted == True and state.holding_sample == False and state.holding_tool == False
 
+#Included both functions just in case - unsure how specific to get with these states
+
 def go_to_sample(state) :
     return state.loc == "sample" and state.holding_tool == True and state.charged == True and state.holding_sample == False
 
 def remove_sample(state) :
     return state.holding_sample == True and state.holding_tool == True and state.charged == True and state.sample_extracted == True and state.loc == "sample"
+
+# def go_to_sample(state) :
+#     return state.loc == "sample" and state.holding_tool == True
+
+# def remove_sample(state) :
+#     return state.holding_sample == True and state.holding_tool == True and state.charged == True and state.sample_extracted == True and state.loc == "sample"
 
 def return_to_charger(state) :
     return mission_complete(state)
