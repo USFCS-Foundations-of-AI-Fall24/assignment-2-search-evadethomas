@@ -145,6 +145,7 @@ no adjacent antennae share a frequency.
 **Question 5: Deep Blue vs AlphaZero (10 points)**
 _Sept 20_
 
+
 In the late 90s, Deep Blue shocked the world by becoming the first computer to beat a human grandmaster, Garry Kasparov. 
 [This paper](https://www.sciencedirect.com/science/article/pii/S0004370201001291?ref=pdf_download&fr=RR-2&rr=851930c31a9617ea) 
 describes how Deep Blue was constructed - it took advantage of specialized hardware, 
