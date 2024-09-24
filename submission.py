@@ -102,6 +102,9 @@ def question4():
     antenna_freq.question4_main()
 
 if __name__=="__main__" :
+
+    # Note there are also main functions called "function_main" that I left in each file because it seemed like a waste to delete them
+
     print("Eva DeThomas\n")
     print("Question 2: \n")
     question2() # mars_planner
