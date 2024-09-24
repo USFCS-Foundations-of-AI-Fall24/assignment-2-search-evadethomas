@@ -117,6 +117,9 @@ def charge(state) :
     r2.prev = state
     return r2
 
+def return_action_list() :
+    return action_list
+
 
 action_list = [charge, drop_sample, pick_up_sample, pick_up_tool, drop_tool, use_tool,
                move_to_sample, move_to_battery, move_to_station]
@@ -145,14 +148,13 @@ def remove_sample(state) :
 def return_to_charger(state) :
     return mission_complete(state)
 
-if __name__=="__main__" :
+def mars_planner_driver():
     s = RoverState()
 
     # Mission complete results
 
     try:
         bfs_result, bfs_count = breadth_first_search(s, action_list, mission_complete)
-        print("BFS state count: ", bfs_count)
 
     except TypeError:
         print("No solution found for bfs")
@@ -160,25 +162,26 @@ if __name__=="__main__" :
 
     try:
         dfs_result, dfs_count = depth_first_search(s, action_list, mission_complete)
-        print("DFS state count: ", dfs_count)
     except TypeError:
         print("No solution found for dfs")
         dfs_count = "No result found"
 
     try:
-        ldfs_result, ldfs_count = depth_first_search(s, action_list, mission_complete, limit=2)
-        print("DFS state count: ", dfs_count)
+        ldfs_result, ldfs_count = depth_first_search(s, action_list, mission_complete, limit=6)
     except TypeError:
         print("No solution found for dfs")
         ldfs_count = "No result found"
 
+    print("\n")
     print("Final mission complete DFS result count: ", dfs_count)
     print("Final mission complete BFS result count: ", bfs_count)
     print("Final mission complete LDFS result count: ", ldfs_count)
 
+    print("\n")
     print("Final mission complete DFS result: ", dfs_result)
     print("Final mission complete BFS result: ", bfs_result)
     print("Final mission complete LDFS result : ", ldfs_result)
+    print("\n")
 
     # Partitioned function results
 
@@ -192,35 +195,35 @@ if __name__=="__main__" :
 
         try:
             bfs_result, bfs_count = breadth_first_search(s1, action_list, i)
-            print("BFS state count: ", bfs_count)
         except TypeError:
             print("No solution found for bfs")
             dfs_count = "No result found"
 
         try:
             dfs_result, dfs_count = depth_first_search(s2, action_list, i)
-            print("DFS state count: ", dfs_count)
         except TypeError:
             print("No solution found for dfs")
             dfs_count = "No result found"
 
         try:
-            ldfs_result, ldfs_count = depth_first_search(s3, action_list, i, limit=10)
-            print("DFS state count: ", dfs_count)
+            ldfs_result, ldfs_count = depth_first_search(s3, action_list, i, limit=8)
         except TypeError:
             print("No solution found for dfs")
             ldfs_count = "No result found"
 
         
-
+        print("\n")
         print(str(i), ":")
+        print("\n")
         print(i, "Final DFS result count: ", dfs_count)
         print(i, "Final BFS result count: ", bfs_count)
-        print(i, "Final LDFS result count: ", ldfs_count, "limit is 10")
+        print(i, "Final LDFS result count: ", ldfs_count, "limit is 8")
+        print("\n")
 
         print(i, "Final DFS result: ", dfs_result)
         print(i, "Final BFS result: ", bfs_result)
-        print(i, "Final LDFS result : ", ldfs_result, "limit is 10")
+        print(i, "Final LDFS result : ", ldfs_result, "limit is 8")
+        print("\n")
 
         # reseting the states
         s1 = bfs_result[0]

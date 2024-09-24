@@ -7,8 +7,6 @@ def breadth_first_search(startState, action_list, goal_test, use_closed_list=Tru
     search_queue = deque()
     closed_list = {}
 
-    print("start state", startState)
-
     count = 0
 
     search_queue.append((startState,""))
@@ -21,11 +19,10 @@ def breadth_first_search(startState, action_list, goal_test, use_closed_list=Tru
 
         if goal_test(next_state[0]):
             print("Goal found")
-            print(next_state)
             ptr = next_state[0]
             while ptr is not None :
                 ptr = ptr.prev
-                print(ptr)
+                # print(ptr)
             return next_state, count
         else :
             successors = next_state[0].successors(action_list)
@@ -46,7 +43,6 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
     closed_list = {}
     count = 0
     depth_count = 0
-    print("Limit ",limit)
 
     search_queue.append((startState,""))
     if use_closed_list :
@@ -58,11 +54,10 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
 
         if goal_test(next_state[0]):
             print("Goal found")
-            print(next_state)
             ptr = next_state[0]
             while ptr is not None :
                 ptr = ptr.prev
-                print(ptr)
+                #print(ptr)
             return next_state, count
         else :
             if depth_count == limit:
@@ -76,5 +71,3 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
                     count += 1
                     closed_list[s[0]] = True
             search_queue.extend(successors)
-
-## add iterative deepening search here

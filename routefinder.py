@@ -37,14 +37,11 @@ def a_star(start_state, heuristic_fn, goal_test, use_closed_list=True) :
     map = map_state()
     start = map_state(start_state, None, 0, heuristic_fn(start_state))
 
-    print("start: ", start.f)
-
     search_queue = PriorityQueue()
     closed_list = {}
     
     mars_graph = read_mars_graph("marsmap.txt")
     search_queue.put(start)
-    print(mars_graph)
 
     while search_queue.empty() == False :
 
@@ -70,8 +67,6 @@ def a_star(start_state, heuristic_fn, goal_test, use_closed_list=True) :
         # f(n) - 
 
     ## you do the rest.
-def goal_test(current_state) :
-    return current_state.location == "1,1"
 
 def traverse(state, start_state) :
     list = []
@@ -95,6 +90,9 @@ def sld(state) :
     y = int(nums[1])
     return math.sqrt((x - 1) ** 2 + (y - 1) ** 2)
 
+def goal_test(current_state) :
+    return current_state.location == "1,1"
+
 ## you implement this. Open the file filename, read in each line,
 ## construct a Graph object and assign it to self.mars_graph().
 def read_mars_graph(filename):
@@ -105,9 +103,9 @@ def read_mars_graph(filename):
             mars_graph[loc[0]] = loc[1].strip().split()
     return mars_graph
     
+def routefinder_main():
+    path = "A-star: ", a_star("8,8", sld, goal_test, use_closed_list = True)
+    uniform_cost = "Uniform-cost: ", a_star("8,8", h1, goal_test, use_closed_list = True)
 
-path = "A-star: ", a_star("8,8", sld, goal_test, use_closed_list = True)
-uniform_cost = "Uniform-cost: ", a_star("8,8", h1, goal_test, use_closed_list = True)
-
-print(path)
-print(uniform_cost)
+    print(path)
+    print(uniform_cost)

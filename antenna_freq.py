@@ -6,6 +6,9 @@ solver = cp_model.CpSolver()
 
 freq = {0 : 'f1',1: 'f2', 2: 'f3'}
 
+def get_freq() :
+    return freq
+
 Antenna1 = model.NewIntVar(0, 2, "A1")
 Antenna2 = model.NewIntVar(0, 2, "A2")
 Antenna3 = model.NewIntVar(0, 2, "A3")
@@ -45,15 +48,17 @@ model.Add(Antenna9 != Antenna8)
 
 status = solver.Solve(model)
 
-if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-    print("Antenna 1: %s" % freq[solver.Value(Antenna1)])
-    print("Antenna 2: %s" % freq[solver.Value(Antenna2)])
-    print("Antenna 3: %s" % freq[solver.Value(Antenna3)])
-    print("Antenna 4: %s" % freq[solver.Value(Antenna4)])
-    print("Antenna 5: %s" % freq[solver.Value(Antenna5)])
-    print("Antenna 6: %s" % freq[solver.Value(Antenna6)])
-    print("Antenna 7: %s" % freq[solver.Value(Antenna7)])
-    print("Antenna 8: %s" % freq[solver.Value(Antenna8)])
-    print("Antenna 9: %s" % freq[solver.Value(Antenna9)])
+def get_status() :
+    return status
 
-
+def question4_main():
+    if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
+        print("Antenna 1: %s" % freq[solver.Value(Antenna1)])
+        print("Antenna 2: %s" % freq[solver.Value(Antenna2)])
+        print("Antenna 3: %s" % freq[solver.Value(Antenna3)])
+        print("Antenna 4: %s" % freq[solver.Value(Antenna4)])
+        print("Antenna 5: %s" % freq[solver.Value(Antenna5)])
+        print("Antenna 6: %s" % freq[solver.Value(Antenna6)])
+        print("Antenna 7: %s" % freq[solver.Value(Antenna7)])
+        print("Antenna 8: %s" % freq[solver.Value(Antenna8)])
+        print("Antenna 9: %s" % freq[solver.Value(Antenna9)])
