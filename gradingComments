@@ -1,0 +1,38 @@
+Assignment 2 comments:
+
+Question 1: Algorithms. 10/10
+
+Question 2:
+
+eq: 5/5
+
+goal: 5/5
+
+BFS/DFS: 5/5
+
+DLS: 7/10
+You're incrementing depth_count after each dequeue, which is going to yield
+an incorrect count. Better to store this as a member variable for each node,
+and then make depth = parent.depth + 1
+
+tools: 10/10
+
+decomposition: 10/10
+
+Question 3:
+
+read_mars_graph: 5/5
+
+A*: 15/15
+
+count states: 5/5
+
+Question 4: 10/10
+
+Question 5: 10/10
+
+97/100
+
+
+
+
